@@ -1,0 +1,8 @@
+streamlit>=1.40
+opencv-python-headless>=4.8
+numpy>=1.24
+pandas>=2.0
+Pillow>=10.0
+plotly>=5.20
+# Optional, only if you have a trained .pt detector:
+# ultralytics>=8.3
