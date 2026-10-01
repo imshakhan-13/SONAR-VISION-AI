@@ -2,319 +2,123 @@
 
 ### AI-Powered Underwater Acoustic Detection & Marine Debris Monitoring
 
-SONAR VISION is a prototype for analyzing side-scan sonar imagery and assisting survey teams in identifying potential underwater targets and anomalies.
+SONAR VISION is a prototype for analyzing **side-scan sonar imagery** and assisting survey teams in identifying potential underwater targets and anomalies.
 
-The system combines AI-based object detection with computer-vision processing to transform sonar imagery into an interpretable inspection workflow covering **detection, classification, confidence analysis, localization, and reporting**.
+The system combines **AI-based object detection** with computer-vision processing to transform sonar imagery into an interpretable inspection workflow covering **detection, classification, confidence analysis, localization, and reporting**.
 
----
+## 🎯 Objective
 
-## Problem
+The prototype is designed to explore how artificial intelligence and computer vision can assist with the analysis of sonar imagery.
 
-Side-scan sonar surveys can generate large volumes of underwater imagery that require significant manual effort to inspect.
+It can detect potential targets in sonar images and provide information that can support further inspection and analysis.
 
-Important targets such as marine debris, entangled fishing nets, pipes, shipwreck-like structures, and other underwater anomalies can be difficult to identify consistently because sonar imagery contains noise, shadows, irregular shapes, and complex seabed patterns.
+## 🔍 Key Capabilities
 
-SONAR VISION aims to provide an assistive analysis layer that helps identify and organize potentially important targets for further investigation.
+* **Sonar Image Analysis** — processes side-scan sonar imagery.
+* **AI-Based Detection** — identifies potential objects or targets within the image.
+* **Computer Vision Processing** — enhances and processes sonar imagery for analysis.
+* **Target Localization** — identifies where detected targets appear within the image.
+* **Confidence Analysis** — provides confidence-related information for detections.
+* **Inspection Workflow** — organizes detection results into an interpretable output.
+* **Reporting** — presents the processed information for further review.
 
----
-
-## Solution
-
-SONAR VISION allows a user to provide a sonar image and analyze it through an interactive dashboard.
-
-The prototype can:
-
-* Process sonar imagery
-* Detect potential objects and anomalies
-* Classify detected targets into supported categories
-* Provide confidence estimates
-* Display bounding boxes around detected targets
-* Analyze visual characteristics such as texture, shadow, brightness, solidity and shape
-* Inspect individual targets through cropped image views
-* Display relative target positions on a survey-frame map
-* Accept optional GPS/geotag information
-* Generate CSV, JSON and annotated-image reports
-
-The workflow is:
+## 🧠 How It Works
 
 ```text
 Sonar Image
      ↓
-Image Processing
+Image Preprocessing
      ↓
-Target Detection
+Computer Vision Enhancement
      ↓
-Classification
+AI-Based Detection
      ↓
-Confidence & Feature Analysis
+Target Identification
      ↓
-Localization
+Confidence & Localization
      ↓
-Report Generation
+Inspection Results
 ```
 
----
+## 📸 Prototype Screenshots
 
-## AI / Detection Architecture
+The repository contains screenshots of the working prototype and its inspection results.
 
-The prototype provides two detection pathways.
+### Target Inspection
 
-### 1. YOLO-based detection
+![Target Inspection](assets/screenshots/Target%20Inspection.png)
 
-When a trained Ultralytics YOLO model is supplied, SONAR VISION uses the model to perform object detection on the input sonar image.
+Additional prototype screenshots can be found in:
 
-The detected bounding boxes, confidence values and model classes are then mapped into the application's target taxonomy.
+`assets/screenshots/`
 
-### 2. Computer-Vision Fallback
+## 🛠️ Technologies
 
-When a trained model is not supplied, the prototype can use an OpenCV-based vision pipeline.
+* Python
+* OpenCV
+* NumPy
+* Pandas
+* YOLO / Ultralytics
+* Streamlit
+* Plotly
+* Computer Vision
+* AI-based Object Detection
 
-The fallback process includes:
-
-* Grayscale conversion
-* Median denoising
-* CLAHE contrast enhancement
-* Background suppression
-* Threshold-based candidate extraction
-* Morphological processing
-* Contour analysis
-* Shape and texture feature extraction
-* Heuristic target classification
-
-This allows the prototype to demonstrate the complete analysis workflow even without a trained YOLO model.
-
----
-
-## Supported Target Categories
-
-The current prototype uses the following categories:
-
-| Category               | Description                                 |
-| ---------------------- | ------------------------------------------- |
-| Shipwreck              | Large or structurally complex sonar anomaly |
-| Pipe / Cylinder        | Elongated, compact structures               |
-| Entangled Net / Debris | Filament-like or low-solidity structures    |
-| Marine Debris          | Potential man-made debris objects           |
-| Natural Seafloor       | Background / non-target seabed structures   |
-| Unknown Anomaly        | Targets requiring further inspection        |
-
-The classifications generated by the prototype are intended as **assistive predictions**, not definitive identification.
-
----
-
-## Key Features
-
-### Detection View
-
-Displays the sonar image with detected targets, bounding boxes, target IDs and confidence values.
-
-### Target Inspector
-
-Allows individual targets to be inspected through:
-
-* Target class
-* Confidence
-* Bounding box
-* Dimensions
-* Aspect ratio
-* Source detection mode
-* Cropped target imagery
-
-### Analytics
-
-Provides:
-
-* Confidence distribution
-* Classification distribution
-* Feature/evidence table
-* Target-level visual analysis
-
-### Localization
-
-The prototype provides relative localization within the sonar survey frame.
-
-Optional GPS data can also be supplied using a CSV file containing target coordinates.
-
-### Reporting
-
-The system can export:
-
-* CSV findings
-* JSON analysis report
-* Annotated PNG image
-
----
-
-## Technology Stack
-
-| Technology       | Purpose                              |
-| ---------------- | ------------------------------------ |
-| Python           | Core application                     |
-| Streamlit        | Interactive dashboard                |
-| OpenCV           | Image processing and computer vision |
-| Ultralytics YOLO | AI object detection                  |
-| NumPy            | Numerical processing                 |
-| Pandas           | Data processing and reporting        |
-| Plotly           | Interactive analytics                |
-| Pillow           | Image handling                       |
-
----
-
-## Project Structure
+## 📂 Project Structure
 
 ```text
 SONAR-VISION-AI/
 │
 ├── app.py
 ├── requirements.txt
+├── README.md
 ├── .gitignore
-└── README.md
+│
+└── assets/
+    └── screenshots/
+        └── Target Inspection.png
 ```
 
-The Python virtual environment is intentionally excluded from the repository.
-
----
-
-## Installation
+## 🚀 Running the Prototype
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/imshakhan-13/SONAR-VISION-AI.git
-```
-
-Enter the project directory:
-
-```bash
 cd SONAR-VISION-AI
 ```
 
-Create a virtual environment:
+Create and activate the virtual environment:
 
 ```bash
 python3 -m venv .venv
-```
-
-Activate it on macOS/Linux:
-
-```bash
 source .venv/bin/activate
 ```
 
-Install the dependencies:
+Install the required packages:
 
 ```bash
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
----
-
-## Running the Prototype
-
-Start the Streamlit application:
+Run the Streamlit application:
 
 ```bash
 streamlit run app.py
 ```
 
-The application will open locally in your browser.
+## 📌 Prototype Scope
 
----
+SONAR VISION is a **prototype** intended to demonstrate an AI-assisted approach to sonar image analysis.
 
-## Input
+The system can detect potential targets in sonar imagery and provide associated analysis through the prototype interface. Results should be treated as **decision-support information** and verified by appropriate survey or domain experts before being used for operational decisions.
 
-The prototype accepts common image formats including:
-
-```text
-PNG
-JPG / JPEG
-BMP
-TIF / TIFF
-```
-
-Optional inputs include:
-
-* Trained YOLO `.pt` model
-* GPS/geotag CSV
-
----
-
-## GPS CSV Format
-
-The GPS file can contain:
-
-```text
-target_id,latitude,longitude
-T-01,XX.XXXX,YY.YYYY
-T-02,XX.XXXX,YY.YYYY
-```
-
-If `target_id` is not provided, rows can be matched sequentially with detected target IDs.
-
----
-
-## Prototype Demonstration
-
-The dashboard demonstrates the complete workflow:
-
-```text
-INPUT
-  ↓
-SONAR IMAGE
-  ↓
-DETECTION
-  ↓
-CLASSIFICATION
-  ↓
-CONFIDENCE ANALYSIS
-  ↓
-TARGET INSPECTION
-  ↓
-LOCALIZATION
-  ↓
-REPORTING
-```
-
----
-
-## Important Note
-
-SONAR VISION is a prototype and should be treated as an **assistive analysis system**.
-
-Detection and classification results should be validated against appropriate sonar data and by qualified personnel before being used for operational, environmental, navigation or recovery decisions.
-
-Model performance depends on the quality, diversity and relevance of the training/validation data used with the YOLO detection pathway.
-
----
-
-## Future Development
-
-Potential future development includes:
-
-* Larger domain-specific sonar datasets
-* Improved marine-debris and anomaly classification
-* Model benchmarking using precision, recall and mAP
-* Temporal analysis across consecutive sonar frames
-* Improved geospatial mapping
-* Integration with survey/navigation systems
-* Human-in-the-loop verification
-* Continuous model improvement using validated survey data
-* Deployment for larger-scale underwater survey workflows
-
----
-
-## Project
+## 👨‍💻 Project
 
 **SONAR VISION**
 
-AI-assisted underwater acoustic analysis for faster and more structured sonar inspection.
-
-### Smart India Hackathon
-
-**Problem Statement:** SIH26057
+Developed as an AI and computer-vision prototype exploring automated analysis of underwater sonar imagery.
 
 ---
 
-## Disclaimer
-
-This repository contains a prototype developed for demonstration and evaluation purposes. Its predictions are not a substitute for expert sonar interpretation or field verification.
+⭐ If you find this project interesting, feel free to explore the code and prototype screenshots.
